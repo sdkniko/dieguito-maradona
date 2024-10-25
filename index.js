@@ -31,9 +31,15 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-mongoose.connect(
-  process.env.DB_RECLAMO, { useNewUrlParser: true, useUnifiedTopology: true }
-);
+const DB_CONNECTION_STRING = "mongodb+srv://sdkgastaldi:nqgFvwFoTp2o0tlc@cluster0.0fh4emf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+mongoose.connect(DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Conexión a la base de datos exitosa");
+  })
+  .catch(err => {
+    console.error("Error en la conexión a la base de datos:", err);
+  });
 
 app.get("/", async (request, response) => {
       return response.send("Beckend reclamos node js express");
